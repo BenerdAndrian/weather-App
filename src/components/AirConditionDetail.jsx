@@ -1,4 +1,4 @@
-import { TodayForecastSection,TodayTempMain,SevendayForecastSection,AirConditionSection } from "./Weather"
+import { TodayForecastSection,TodayTempMain,SevendayForecastSection,AirConditionSection } from "./Weather.jsx"
 import { DataContext } from "./DataContext"
 import { useContext } from "react"
 import { NavbarSection } from "./Navbar"

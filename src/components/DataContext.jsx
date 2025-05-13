@@ -1,4 +1,4 @@
-import { useFetchAPI } from "./FetchAPI";
+import { useFetchAPI } from "./FetchAPI.jsx";
 import { createContext,useState } from "react";
 export const DataContext=createContext(null);
 export const DataProvider=({children})=>{

@@ -8,7 +8,7 @@ function App() {
  return(
   <>
   <DataProvider>
-  <ErrorPage/>
+  <Outlet/>
   </DataProvider>
 
   </>
@@ -17,3 +17,4 @@ function App() {
 }
 
 export default App
+
