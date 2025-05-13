@@ -1,3 +1,12 @@
+import { useFetchAPI } from "./FetchAPI";
+import { InputSection } from "./Input";
+import { useState,useEffect,useContext } from "react";
+import { LoadingPage } from "./LoadingPage";
+import { ErrorPage } from "./ErrorPage";
+import { NavbarSection } from "./Navbar";
+import { AirInfoCard } from "./InfoCard";
+import { DataContext } from "./DataContext";
+import { useNavigate } from "react-router-dom";
 //importing images
 import tempIcon from '../assets/img/temp.svg'
 import sunIcon from '../assets/img/uvIndex.svg'
@@ -7,6 +16,39 @@ import visibility from '../assets/img/visibility.svg'
 import sunset from '../assets/img/sunset.svg'
 import shower from '../assets/img/shower.svg'
 import pressure from '../assets/img/pressure.svg'
+export default function WeatherSection(){
+  const [showError,setShowError]=useState(false)
+  const {data,error,loading}=useContext(DataContext)
+  // prepare the array of target hours for the TodayForecast component to render dynamically
+  const targetHours = ['06', '09', '12', '15', '18', '21'];
+  // receiving props passing from the child by lifting state up.
+  const changeErrorStatus=()=>{
+      setShowError(false)
+  }
+   useEffect(()=>{
+    if(error){
+     setShowError(true)
+    }
+   },[error])
+  //render jsx
+  return(
+     <>
+     {showError && <ErrorPage handleStatus={changeErrorStatus}/>}
+     {/* if it still fetching the data,we show the LoadingPage component */}
+     {loading && <LoadingPage/>}
+     <div className="md:grid md:grid-cols-[80px_1.5fr_1fr] pb-[5rem] md:grid-rows-[40px_1fr_1fr_1fr] md:pb-[0.8rem] bg-black gap-3 py-3 px-5">
+     <NavbarSection/>
+     <div className="md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-5">
+     <InputSection/>
+     <TodayTempMain data={data}/>
+     <TodayForecastSection data={data} targetHours={targetHours}/>
+     <AirConditionSection data={data} num={4}/>
+     </div>
+     <SevendayForecastSection data={data} numOfDays={7}/>
+     </div>
+     </>
+  )
+ }
 function TodayForecastSection({targetHours=[],data}){
     //if there is no data, return null
    if(!data) return null;
