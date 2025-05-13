@@ -10,7 +10,7 @@ function InputSection(){
     }
     return(
         <>
-         <input className="bg-[rgb(30,40,55)] text-white p-3 rounded-2xl w-full" onKeyDown={handleKeyDown} onChange={(e)=>setInputValue(e.target.value)} type="text" placeholder="Search For A City" />
+         <input className="bg-[rgb(30,40,55)] text-white p-3 rounded-2xl w-full mb-5" onKeyDown={handleKeyDown} onChange={(e)=>setInputValue(e.target.value)} type="text" placeholder="Search For A City" />
         </>
 
     )

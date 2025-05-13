@@ -10,25 +10,25 @@ export default function AirConditionDetailPage(){
     const targetHours=['06',"09","12"]
     return(
         <>
-        <div className="bg-black grid grid-cols-[80px_1.5fr_1fr] grid-rows-[40px_1fr_1fr_1fr] gap-3">
+        <div className="bg-black grid md:grid-cols-[80px_1.5fr_1fr] md:grid-rows-[10px_1fr_1fr_1fr] gap-3 pb-[5rem] md:py-3 px-5">
          <NavbarSection/>
-         <div className="grid col-start-2 col-end-3 row-start-1 row-end-5">
-            <div className="row-start-1 row-end-2 flex">
+         <div className="grid md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-5">
+            <div className="md:row-start-1 md:row-end-2 flex text-center mt-3 mb-3 ml-5">
              <img className="h-5 w-5 cursor-pointer" onClick={()=>navigate("/Weather")} src={backIcon} alt="back icon" />
-             <h1 className="font-bold text-gray-400">Air Conditions</h1>
+             <h1 className="font-bold text-gray-400 w-full text-center">Air Conditions</h1>
             </div>
-             <div className="row-start-2 row-end-3">
+             <div className="md:row-start-2 md:row-end-3">
              <TodayTempMain data={data}/>
              </div>
-             <div className="row-start-3 row-end-5">
-                <AirConditionSection data={data} num={8}/>
+             <div className="md:row-start-3 md:row-end-5 mt-3">
+                <AirConditionSection data={data} mode={'card'}/>
              </div>
          </div>
-         <div className="grid col-start-3 col-end-4 row-start-2 row-end-5">
-            <div className="row-start-2 row-end-3">
+         <div className="grid md:col-start-3 md:col-end-4 md:row-start-2 md:row-end-5">
+            <div className="md:row-start-2 md:row-end-3 mb-3">
             <TodayForecastSection targetHours={targetHours} data={data}/>
             </div>
-            <div className="row-start-3 row-end-5">
+            <div className="md:row-start-3 md:row-end-5">
             <SevendayForecastSection data={data} numOfDays={7}/>
             </div>
          </div>
