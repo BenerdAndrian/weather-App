@@ -118,4 +118,39 @@ function TodayTempMain({data}){
     </div>
    )
 }
-  
+function SevendayForecastSection({data,numOfDays=0}){
+  if(!data) return null;
+  // take 7 days only
+const days=data.days.slice(0,numOfDays);
+// change from the dd/mm/yyyy format into weekday format
+const extractWeekDay=(datetime)=>{
+  const date=new Date(datetime);
+  const options = { weekday: 'short' }; // e.g., "Mon"
+  const weekday = date.toLocaleDateString('en-US', options);
+  return weekday;
+}
+// for the name longer than one word, the data will include hyphen "-",replacing '-' with space will make it cleaner.
+  const discardHyphen = (string) => {
+    return string.replace(/-/g, ' ');
+  };
+  //render jsx
+return(
+  <>
+  <div className="mt-[1rem] md:mt-0 bg-[rgb(30,40,55)] rounded-2xl col-start-3 col-end-4 row-start-2 row-end-5 p-3">
+    <h2 className="text-[lightgray] font-bold text-[0.6rem]">7-DAY FORECAST</h2>
+    <ul className="flex flex-col justify-between gap-5 mt-4">
+      {days.map((day)=>(
+        <li className="flex justify-between items-center border-b-1 border-b-gray-300 last:border-b-0 pb-1">
+         <p className="text-[lightgray] text-[0.7rem]">{extractWeekDay(day.datetime)}</p>
+         <div className="flex items-center">
+          <img className="w-8 h-8 mr-2" src={`../../public/${day.icon}.png`} alt="img" />
+          <p className="text-white font-bold text-[0.6rem] w-10">{discardHyphen(day.icon)}</p>
+         </div>
+         <p className="text-white text-[0.7rem]">{day.datetime}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+  </>
+)
+}
