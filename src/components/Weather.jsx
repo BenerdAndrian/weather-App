@@ -32,3 +32,73 @@ function TodayForecastSection({targetHours=[],data}){
    </>
   )
  }
+ function AirConditionSection({data,num}){
+    const navigate=useNavigate();
+     //if there is no data, return null
+    if(!data) return null;
+    //organize info into an array so that we can loop through it and render desired info,the array stores the title,image and info
+    const categories=[
+      {
+        name:'Real Feel',
+        image: tempIcon,
+        info:data.currentConditions.feelslike+'°',
+      },
+      {
+        name:'Wind',
+        image:windIcon,
+        info:data.currentConditions.windspeed,
+      },
+      {
+        name:'Chance Of Rain',
+        image:waterDrop,
+        info:data.currentConditions.precipprob+'%',
+      },
+      {
+        name:'UV Index',
+        image:sunIcon,
+        info:data.currentConditions.uvindex
+      },
+      {
+        name:'Humidity',
+        image:shower,
+        info:data.currentConditions.humidity
+      },
+      {
+        name:'Visibility',
+        image:visibility,
+        info:data.currentConditions.visibility
+      },
+      {
+        name:'Pressure',
+        image:pressure,
+        info:data.currentConditions.pressure
+      },
+      {
+        name:"Sunset",
+        image:sunset,
+        info:data.currentConditions.sunset
+      }
+    ]
+    //render jsx
+    return(
+      <>
+      <div className="bg-[rgb(30,40,55)] rounded-2xl p-3 pr-[2rem] mt-2">
+      <div className="flex justify-between">
+      <h2 className="text-[lightgray] font-bold ml-[1rem] text-[0.6rem]">AIR CONDITIONS</h2>
+      <button onClick={()=>navigate('/Weather/air-conditions')} className="bg-blue-600 text-white font-bold rounded-full text-[0.8rem] py-1 px-2 cursor-pointer">See More</button>
+      </div>
+      <ul className="grid grid-cols-2 py-1 pl-[2rem] gap-2">
+    {/* looping through the array slice with the desired number limid of cards */}
+      {categories.slice(0,num).map((category)=>(
+        <li>
+          <AirInfoCard image={category.image} data={category.info} title={category.name}/>
+        </li>
+      ))}
+      </ul>
+     
+      </div>
+  
+      </>
+    )
+  }
+  
