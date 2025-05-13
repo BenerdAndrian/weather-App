@@ -101,4 +101,21 @@ function TodayForecastSection({targetHours=[],data}){
       </>
     )
   }
+  // component to render city name and temperature,icon
+function TodayTempMain({data}){
+  //if there is no data, return null
+  if(!data) return null;
+   return(
+    <div className="grid grid-cols-2 bg-black ml-[2rem]">
+        <div className="grid grid-rows-2">
+          <div className="my-5">
+          <p className="font-bold text-white text-[1.4rem]">{data.address}</p>
+          <p className="text-gray-400">Chance Of Rain: {data.currentConditions.precipprob}%</p>
+          </div>
+          <p className="font-bold text-white text-[1.4rem] mt-3">{data.currentConditions.temp}°</p>
+        </div>
+        <img className="w-20 h-20 md:w-25 md:h-25 mt-10 ml-[4rem]" src={`../../public/${data.currentConditions.icon}.png`}alt="Weather icon" />
+    </div>
+   )
+}
   
