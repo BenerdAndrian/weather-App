@@ -19,11 +19,7 @@ import pressure from '../assets/img/pressure.svg'
 // Weather section component which serve as parent component for the main Weather UI page
 export default function WeatherSection(){
  const [showError,setShowError]=useState(false)
- const {data,error,loading}=useContext(DataContext)
- let weatherData;
- if(!data.locations) weatherData=data;
- else if(data.locations) weatherData=data.locations[0]
- console.log(data)
+ const {data,error,loading,singleCityData,singleCityError,singleCityLoading}=useContext(DataContext)
  // prepare the array of target hours for the TodayForecast component to render dynamically
  const targetHours = ['06', '09', '12', '15', '18', '21'];
  // receiving props passing from the child by lifting state up.
@@ -31,25 +27,25 @@ export default function WeatherSection(){
      setShowError(false)
  }
   useEffect(()=>{
-   if(error){
+   if(singleCityError){
     setShowError(true)
    }
-  },[error])
+  },[singleCityError])
  //render jsx
  return(
     <>
     {showError && <ErrorPage handleStatus={changeErrorStatus}/>}
     {/* if it still fetching the data,we show the LoadingPage component */}
-    {loading && <LoadingPage/>}
+    {singleCityLoading && <LoadingPage/>}
     <div className="md:grid md:grid-cols-[80px_1.5fr_1fr] pb-[5rem] md:grid-rows-[40px_1fr_1fr_1fr] md:pb-[0.8rem] bg-black gap-4 py-3 px-5">
     <NavbarSection/>
     <div className="md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-5">
     <InputSection/>
-    <TodayTempMain data={data[0]}/>
-    <TodayForecastSection data={data[0]} targetHours={targetHours}/>
-    <AirConditionSection data={data[0]} mode={'board'}/>
+    <TodayTempMain data={singleCityData}/>
+    <TodayForecastSection data={singleCityData} targetHours={targetHours}/>
+    <AirConditionSection data={singleCityData} mode={'board'}/>
     </div>
-    <SevendayForecastSection data={data[0]} numOfDays={7}/>
+    <SevendayForecastSection data={singleCityData} numOfDays={7}/>
     </div>
     </>
  )

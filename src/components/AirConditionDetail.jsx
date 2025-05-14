@@ -6,7 +6,7 @@ import backIcon from '../assets/img/back.svg'
 import { useNavigate } from "react-router-dom"
 export default function AirConditionDetailPage(){
     const navigate=useNavigate()
-    const {data,error,loading}=useContext(DataContext)
+    const {singleCityData,singleCityError,singleCityLoading}=useContext(DataContext)
     const targetHours=['06',"09","12"]
     return(
         <>
@@ -18,18 +18,18 @@ export default function AirConditionDetailPage(){
              <h1 className="font-bold text-gray-400 w-full text-center">Air Conditions</h1>
             </div>
              <div className="md:row-start-2 md:row-end-3">
-             <TodayTempMain data={data}/>
+             <TodayTempMain data={singleCityData}/>
              </div>
              <div className="md:row-start-3 md:row-end-5 mt-3">
-                <AirConditionSection data={data} mode={'card'}/>
+                <AirConditionSection data={singleCityData} mode={'card'}/>
              </div>
          </div>
          <div className="grid md:col-start-3 md:col-end-4 md:row-start-2 md:row-end-5">
             <div className="md:row-start-2 md:row-end-3 mb-3">
-            <TodayForecastSection targetHours={targetHours} data={data}/>
+            <TodayForecastSection targetHours={targetHours} data={singleCityData}/>
             </div>
             <div className="md:row-start-3 md:row-end-5">
-            <SevendayForecastSection data={data} numOfDays={7}/>
+            <SevendayForecastSection data={singleCityData} numOfDays={7}/>
             </div>
          </div>
         </div>
