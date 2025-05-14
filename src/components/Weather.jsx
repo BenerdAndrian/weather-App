@@ -20,6 +20,10 @@ import pressure from '../assets/img/pressure.svg'
 export default function WeatherSection(){
  const [showError,setShowError]=useState(false)
  const {data,error,loading}=useContext(DataContext)
+ let weatherData;
+ if(!data.locations) weatherData=data;
+ else if(data.locations) weatherData=data.locations[0]
+ console.log(data)
  // prepare the array of target hours for the TodayForecast component to render dynamically
  const targetHours = ['06', '09', '12', '15', '18', '21'];
  // receiving props passing from the child by lifting state up.
@@ -41,11 +45,11 @@ export default function WeatherSection(){
     <NavbarSection/>
     <div className="md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-5">
     <InputSection/>
-    <TodayTempMain data={data}/>
-    <TodayForecastSection data={data} targetHours={targetHours}/>
-    <AirConditionSection data={data} mode={'board'}/>
+    <TodayTempMain data={data[0]}/>
+    <TodayForecastSection data={data[0]} targetHours={targetHours}/>
+    <AirConditionSection data={data[0]} mode={'board'}/>
     </div>
-    <SevendayForecastSection data={data} numOfDays={7}/>
+    <SevendayForecastSection data={data[0]} numOfDays={7}/>
     </div>
     </>
  )
