@@ -22,6 +22,7 @@ export default function WeatherSection(){
  const {data,error,loading,singleCityData,singleCityError,singleCityLoading}=useContext(DataContext)
  // prepare the array of target hours for the TodayForecast component to render dynamically
  const targetHours = ['06', '09', '12', '15', '18', '21'];
+ console.log(data)
  // receiving props passing from the child by lifting state up.
  const changeErrorStatus=()=>{
      setShowError(false)
