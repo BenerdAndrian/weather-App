@@ -8,7 +8,7 @@ import { ErrorPage } from "./ErrorPage";
 import { LoadingPage } from "./LoadingPage";
 import { useState,useEffect } from "react";
  export default function CitiesPage(){
-    const {singleCityData,singleCityError,singleCityLoading,setSingleCityError}=useContext(DataContext)
+    const {singleCityData,singleCityError,singleCityLoading,setSingleCityError,data}=useContext(DataContext)
     const [showError,setShowError]=useState(false);
     const changeErrorStatus=()=>{
         setShowError(false)
@@ -23,25 +23,28 @@ import { useState,useEffect } from "react";
         <>
         {showError && <ErrorPage handleStatus={changeErrorStatus}/>}
         {singleCityLoading && <LoadingPage/>}
-        <div className="md:grid md:grid-cols-[1.5fr_1fr] md:grid-rows-[40px_1fr_1fr_1fr] bg-black px-5">
-        <div className="md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-2">
-        <InputSection/>
-        </div>
-        <div className="md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-5 mt-[2rem]">
-        <SearchedCities/>
-        </div>
-        <div className="md:col-start-2 md:col-end-3 md:row-start-2 row-end-5 md:ml-[2rem]">
-         <TodayTempMain data={singleCityData}/>
-         <div className="mb-4">
-         <TodayForecastSection targetHours={['06','09','12']} data={singleCityData}/>
-         <div className="mt-3">
-         <SevendayForecastSection numOfDays={3} data={singleCityData}/>
-         </div>
-         </div>
-
-        </div>
-       
-        </div>
+        {(singleCityData && data) && 
+          <div className="md:grid md:grid-cols-[1.5fr_1fr] md:grid-rows-[40px_1fr_1fr_1fr] bg-black px-5">
+          <div className="md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-2">
+          <InputSection/>
+          </div>
+          <div className="md:col-start-1 md:col-end-2 md:row-start-2 md:row-end-5 mt-[2rem]">
+          <SearchedCities/>
+          </div>
+          <div className="md:col-start-2 md:col-end-3 md:row-start-2 row-end-5 md:ml-[2rem]">
+           <TodayTempMain data={singleCityData}/>
+           <div className="mb-4">
+           <TodayForecastSection targetHours={['06','09','12']} data={singleCityData}/>
+           <div className="mt-3">
+           <SevendayForecastSection numOfDays={3} data={singleCityData}/>
+           </div>
+           </div>
+  
+          </div>
+         
+          </div>
+        }
+      
         </>
     )
 }

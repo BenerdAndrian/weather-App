@@ -2,7 +2,7 @@ import { useFetchAPI, useFetchAPIForFixedCity } from "./FetchAPI.jsx";
 import { createContext,useEffect,useState } from "react";
 export const DataContext=createContext(null);
  export const DataProvider = ({ children }) => {
-        const [city, setCity] = useState('saigon');
+        const [city, setCity] = useState('hanoi');
         const [cityList, setCityList] = useState([]);
         const {
           data: singleCityData,
@@ -24,28 +24,20 @@ export const DataContext=createContext(null);
             setCityList(updatedList); // Update the state with the new array
           }
         },[city])
-       
         if(!singleCityError && !cityList.includes(city.toLowerCase())){
             setCityList(prev => [city, ...prev]);
             console.log('singleCityError2: ',singleCityError)
           
         }
-       
         console.log(cityList)
-        // useEffect(() => {
-        //   if (!singleCityError && !cityList.includes(city)) {
-        //     setCityList(prev => [city, ...prev]);
-        //     console.log('singleCityError2: ',singleCityError)
-        //   }
-        // }, [city, singleCityError, cityList]);
-      
         const {
           data,
           error,
           loading,
           setError,
         } = useFetchAPI(cityList);
-      
+        console.log(data)
+
         return (
           <DataContext.Provider
             value={{
@@ -60,6 +52,7 @@ export const DataContext=createContext(null);
               singleCityLoading,
               setError,
               setSingleCityError,
+              setCityList,
             }}
           >
             {children}

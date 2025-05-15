@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import { DataContext } from "./DataContext"
 import locationArrow from '../assets/img/locationArrow.svg'
 import closeIcon from '../assets/img/closeIconn.svg'
-function CityCard({icon,address,currTime,temp}){
+function CityCard({icon,address,currTime,temp,deleteCity}){
     const [isHover,setIsHover]=useState(false)
     return(
         <div className="flex gap-3 group">
@@ -22,7 +22,7 @@ function CityCard({icon,address,currTime,temp}){
         </div>
       
         {/* Secondary Element */}
-        <div className="bg-red-600 flex items-center justify-center rounded-2xl h-0 w-0 opacity-0 transition-[width,opacity] duration-700 ease-in-out group-hover:w-30 group-hover:h-30 group-hover:opacity-100">
+        <div onClick={deleteCity} className="bg-red-600 cursor-pointer flex items-center justify-center rounded-2xl h-0 w-0 opacity-0 transition-[width,opacity] duration-700 ease-in-out group-hover:w-30 group-hover:h-30 group-hover:opacity-100">
           <img className="w-6 h-6" src={closeIcon} alt="close icon" />
         </div>
       </div>

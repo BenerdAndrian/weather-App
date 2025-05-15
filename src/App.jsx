@@ -6,6 +6,7 @@ import { createContext } from 'react';
 import { DataProvider } from './components/DataContext';
 import { NavbarSection } from './components/Navbar';
 function App() {
+  
  return(
   <>
   <div className="grid md:grid-cols-[80px_1fr] bg-black p-3">
