@@ -9,7 +9,7 @@ function NavbarSection(){
     }
     console.log(clickedSection)
     return(
-        <nav className=" fixed h-full py-3 bottom-0 left-0 w-full flex flex-row md:flex-col items-center gap-7 bg-[rgb(30,40,55)] md:static text-gray-300 md:rounded-3xl px-5">
+        <nav className=" fixed md:h-full py-3 bottom-0 left-0 w-full flex flex-row md:flex-col items-center gap-7 bg-[rgb(30,40,55)] md:static text-gray-300 md:rounded-3xl px-5">
             <img className="w-8 h-8 ml-3 rotate-10 md:mt-[2rem]" src={umbrella} alt="icon" />
             <ul className="flex flex-row w-80 ml-[2rem] justify-between md:flex-col items-center md:h-60 text-[0.7rem] md:mt-5 md:ml-0">
                  <li onClick={()=>{toClickSection(0),navigate('/Weather')}} className="flex flex-col items-center justify-center cursor-pointer">

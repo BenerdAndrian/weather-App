@@ -84,7 +84,7 @@ function TodayForecastSection({targetHours=[],data}){
   // render jsx
   return(
   <>
-  <div className="bg-[rgb(30,40,55)] rounded-2xl pt-3 mt-3 p-3">
+  <div className="bg-[rgb(30,40,55)] rounded-2xl pt-3 mt-3 px-3">
   <h2 className="text-[lightgray] font-bold ml-[2rem] text-[0.7rem]">TODAY'S FORECAST</h2>
   <ul className="grid grid-cols-3 md:grid-cols-[repeat(auto-fit,minmax(0,1fr))] p-2">
     {hours.map((hour)=>(
@@ -173,11 +173,11 @@ const extractWeekDay=(datetime)=>{
   //render jsx
 return(
   <>
-  <div className="mt-[1rem] h-full md:mt-0 bg-[rgb(30,40,55)] rounded-2xl p-4 pb-[3rem] px-[2rem]">
+  <div className="mt-[1rem] h-full md:mt-0 bg-[rgb(30,40,55)] rounded-2xl pt-4 px-[2rem]">
     <h2 className="text-[lightgray] font-bold text-[0.7rem]">7-DAY FORECAST</h2>
     <ul className="flex flex-col justify-between gap-3 mt-2 h-full">
       {days.map((day)=>(
-        <li className="flex py-3 justify-between items-center border-b-1 border-b-[rgb(60,60,80)] last:border-b-0 pb-1 -mt-[1rem] h-full">
+        <li className="flex py-3 justify-between items-center border-b-1 border-b-[rgb(60,60,80)] last:border-b-0 last:pb-8 -mt-[1rem] h-full">
          <p className="text-[lightgray] text-[0.7rem] font-bold">{extractWeekDay(day.datetime)}</p>
          <div className="flex items-center h-[2.5rem]">
           <img className="w-8 h-8 mr-2" src={`../../public/${day.icon}.png`} alt="img" />

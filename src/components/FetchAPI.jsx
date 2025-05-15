@@ -39,7 +39,7 @@ function useFetchAPI(cityList){
     setLoading(true);
     if (!cityList || cityList.length === 0) return;
     setError(false);
-    fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timelinemulti?key=R9Y3JEJJBA9SFRHKD32F92GMQ&locations=${encodeURIComponent(cityList.join('|'))}&unitGroup=metric&contentType=json`)
+    fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timelinemulti?key=R9Y3JEJJBA9SFRHKD32F92GMQ&locations=${encodeURIComponent(cityList.join('|'))}&unitGroup=us&contentType=json`)
     .then(response=>{
       if(!response.ok) throw new Error('No data')
       else{

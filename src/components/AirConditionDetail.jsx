@@ -16,10 +16,10 @@ export default function AirConditionDetailPage(){
              <img className="h-5 w-5 cursor-pointer" onClick={()=>navigate("/Weather")} src={backIcon} alt="back icon" />
              <h1 className="font-bold text-gray-400 w-full text-center">Air Conditions</h1>
             </div>
-             <div className="md:row-start-2 md:row-end-3 md:ml-[3rem] mt-3">
+             <div className="md:row-start-2 md:row-end-3 md:ml-[3rem] mt-7">
              <TodayTempMain data={singleCityData}/>
              </div>
-             <div className="md:row-start-3 md:row-end-5 -mt-[2rem]">
+             <div className="md:row-start-3 md:row-end-5 mt-2">
                 <AirConditionSection data={singleCityData} mode={'card'}/>
              </div>
          </div>
@@ -28,7 +28,7 @@ export default function AirConditionDetailPage(){
             <TodayForecastSection targetHours={targetHours} data={singleCityData}/>
             </div>
             <div className="md:row-start-3 md:row-end-5">
-            <SevendayForecastSection data={singleCityData} numOfDays={7}/>
+            <SevendayForecastSection data={singleCityData} numOfDays={5}/>
             </div>
          </div>
         </div>
