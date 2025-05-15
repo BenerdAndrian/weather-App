@@ -3,6 +3,7 @@ import { DataContext } from "./DataContext";
 import { CityCard } from "./CityCard";
 function SearchedCities(){
     const {data,error,loading}=useContext(DataContext);
+    console.log(data)
     const currentTime=(epochTime)=>{
      const date=new Date(epochTime*1000);
      const localTime=date.toLocaleDateString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
@@ -10,7 +11,7 @@ function SearchedCities(){
     }
     return(
         <>
-         <ul className="flex flex-col gap-3">
+         <ul className="flex flex-col">
          {data.locations && data.locations.map((location)=>(
            <li>
            <CityCard icon={location.days[0].icon} address={location.address} currTime={currentTime(location.days[0].datetimeEpoch)} temp={location.days[0].temp}/>

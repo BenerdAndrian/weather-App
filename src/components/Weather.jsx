@@ -19,13 +19,14 @@ import pressure from '../assets/img/pressure.svg'
 // Weather section component which serve as parent component for the main Weather UI page
 export default function WeatherSection(){
  const [showError,setShowError]=useState(false)
- const {data,error,loading,singleCityData,singleCityError,singleCityLoading}=useContext(DataContext)
+ const {data,error,loading,singleCityData,singleCityError,singleCityLoading,setError,setSingleCityError}=useContext(DataContext)
  // prepare the array of target hours for the TodayForecast component to render dynamically
  const targetHours = ['06', '09', '12', '15', '18', '21'];
  console.log(data)
  // receiving props passing from the child by lifting state up.
  const changeErrorStatus=()=>{
      setShowError(false)
+     setSingleCityError(false);
  }
   useEffect(()=>{
    if(singleCityError){
@@ -38,15 +39,19 @@ export default function WeatherSection(){
     {showError && <ErrorPage handleStatus={changeErrorStatus}/>}
     {/* if it still fetching the data,we show the LoadingPage component */}
     {singleCityLoading && <LoadingPage/>}
-    <div className="md:grid md:grid-cols-[80px_1.5fr_1fr] pb-[5rem] md:grid-rows-[40px_1fr_1fr_1fr] md:pb-[0.8rem] bg-black gap-4 py-3 px-5">
-    <NavbarSection/>
-    <div className="md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-5">
+    <div className="md:grid md:grid-cols-[1.5fr_1fr] md:grid-rows-[40px_1fr_1fr_1fr] bg-black gap-4 px-5">
+    <div className="md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-5">
     <InputSection/>
+    <div className="md:ml-[3rem]">
     <TodayTempMain data={singleCityData}/>
+    </div>
+   
     <TodayForecastSection data={singleCityData} targetHours={targetHours}/>
     <AirConditionSection data={singleCityData} mode={'board'}/>
     </div>
+    <div className="md:col-start-2 md:col-end-3 md:row-start-2 md:row-end-5">
     <SevendayForecastSection data={singleCityData} numOfDays={7}/>
+    </div>
     </div>
     </>
  )
@@ -56,15 +61,15 @@ function TodayTempMain({data}){
   //if there is no data, return null
   if(!data) return null;
    return(
-    <div className="grid grid-cols-2 bg-black ml-[3rem]">
+    <div className="grid grid-cols-2 bg-black">
         <div className="grid grid-rows-2">
           <div>
           <p className="font-bold text-white text-[1.5rem]">{data.address}</p>
           <p className="text-gray-400">Chance Of Rain: {data.currentConditions.precipprob}%</p>
           </div>
-          <p className="font-bold text-white text-[1.7rem] mt-5">{data.currentConditions.temp}°</p>
+          <p className="font-bold text-white text-[1.6rem] mt-5">{data.currentConditions.temp}°</p>
         </div>
-        <img className="w-20 h-20 md:w-30 md:h-30 ml-[4rem]" src={`../../public/${data.currentConditions.icon}.png`}alt="Weather icon" />
+        <img className="w-25 h-25 md:w-30 md:h-30 ml-[2rem] md:ml-[4rem]" src={`../../public/${data.currentConditions.icon}.png`}alt="Weather icon" />
     </div>
    )
 }
@@ -79,9 +84,9 @@ function TodayForecastSection({targetHours=[],data}){
   // render jsx
   return(
   <>
-  <div className="bg-[rgb(30,40,55)] rounded-2xl pt-4 mt-4">
+  <div className="bg-[rgb(30,40,55)] rounded-2xl pt-3 mt-3 p-3">
   <h2 className="text-[lightgray] font-bold ml-[2rem] text-[0.7rem]">TODAY'S FORECAST</h2>
-  <ul className="grid grid-cols-3 md:grid-cols-[repeat(auto-fit,minmax(0,1fr))] p-2 pb-3">
+  <ul className="grid grid-cols-3 md:grid-cols-[repeat(auto-fit,minmax(0,1fr))] p-2">
     {hours.map((hour)=>(
        <li className="flex flex-col items-center justify-center border-r-1 border-r-gray-300 last:border-r-0 text-[0.6rem]">
        <p className="text-[lightgray] mb-2 text-[0.8rem]">{hour.datetime.split(':')[0]}:00</p>
@@ -168,17 +173,17 @@ const extractWeekDay=(datetime)=>{
   //render jsx
 return(
   <>
-  <div className="mt-[1rem] md:mt-0 bg-[rgb(30,40,55)] rounded-2xl col-start-3 col-end-4 row-start-2 row-end-5 p-3 pb-7">
+  <div className="mt-[1rem] h-full md:mt-0 bg-[rgb(30,40,55)] rounded-2xl p-4 pb-[3rem] px-[2rem]">
     <h2 className="text-[lightgray] font-bold text-[0.7rem]">7-DAY FORECAST</h2>
-    <ul className="flex flex-col justify-between gap-5 mt-6 h-full">
+    <ul className="flex flex-col justify-between gap-3 mt-2 h-full">
       {days.map((day)=>(
-        <li className="flex justify-between items-center border-b-1 border-b-[rgb(60,60,80)] last:border-b-0 pb-1 -mt-[1rem] h-full">
-         <p className="text-[lightgray] text-[0.7rem]">{extractWeekDay(day.datetime)}</p>
-         <div className="flex items-center">
+        <li className="flex py-3 justify-between items-center border-b-1 border-b-[rgb(60,60,80)] last:border-b-0 pb-1 -mt-[1rem] h-full">
+         <p className="text-[lightgray] text-[0.7rem] font-bold">{extractWeekDay(day.datetime)}</p>
+         <div className="flex items-center h-[2.5rem]">
           <img className="w-8 h-8 mr-2" src={`../../public/${day.icon}.png`} alt="img" />
-          <p className="text-white font-bold text-[0.7rem] w-10">{discardHyphen(day.icon)}</p>
+          <p className="text-white font-bold text-[0.8rem] w-10">{discardHyphen(day.icon)}</p>
          </div>
-         <p className="text-white text-[0.7rem]">{day.datetime}</p>
+         <p className="text-white text-[0.7rem] font-bold">{day.datetime}</p>
         </li>
       ))}
     </ul>

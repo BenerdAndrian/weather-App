@@ -28,7 +28,7 @@ function useFetchAPIForFixedCity(city){
     setLoading(false)
    })
    },[city])
-   return{data,error,loading}
+   return{data,error,loading,setError}
 }
 //fetch multiple location
 function useFetchAPI(cityList){
@@ -57,6 +57,6 @@ function useFetchAPI(cityList){
     })
   },[cityList])
   
-  return {data,error,loading};
+  return {data,error,loading,setError};
 }
 export {useFetchAPI,useFetchAPIForFixedCity}
