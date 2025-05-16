@@ -5,6 +5,7 @@ import { Outlet } from 'react-router-dom';
 import { createContext } from 'react';
 import { DataProvider } from './components/DataContext';
 import { NavbarSection } from './components/Navbar';
+import MapComponent from './components/MapComponent';
 function App() {
   
  return(
