@@ -17,7 +17,8 @@ function SearchedCities(){
     }
     return(
         <>
-         <ul className="flex flex-col">
+         <ul className="flex flex-col scroll-auto">
+        
          {data.locations && data.locations.map((location,index)=>(
            <li>
            <CityCard deleteCity={()=>deleteCity(index)} icon={location.days[0].icon} address={location.address} currTime={currentTime(location.days[0].datetimeEpoch)} temp={location.days[0].temp}/>

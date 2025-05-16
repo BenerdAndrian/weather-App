@@ -5,6 +5,13 @@ export const DataContext=createContext(null);
         const [city, setCity] = useState('hanoi');
         const [cityList, setCityList] = useState([]);
         const {
+          FetchData,
+          data,
+          error,
+          loading,
+          setError
+        } = useFetchAPI();
+        const {
           data: singleCityData,
           error: singleCityError,
           loading: singleCityLoading,
@@ -13,29 +20,34 @@ export const DataContext=createContext(null);
         // Reset error right after new city is set
         console.log('singleCityError1: ',singleCityError)
         // Add to cityList only if no error and city is not already added
-        useEffect(()=>{
-          if(cityList.includes(city.toLowerCase())){
-            const index = cityList.findIndex(
-              name => name.toLowerCase() === city.toLowerCase()
-            );
-            const updatedList = [...cityList]; // Create a shallow copy to avoid mutating the original array
-            const [item] = updatedList.splice(index, 1); // Remove the matched item
-            updatedList.unshift(item); // Add it to the front
-            setCityList(updatedList); // Update the state with the new array
+        useEffect(() => {
+          if (!singleCityLoading && !singleCityError && cityList.length<5) {
+            setCityList(prevList => {
+              const lowerCity = city.toLowerCase();
+              const index = prevList.findIndex(name => name.toLowerCase() === lowerCity);
+        
+              if (index === -1) {
+                return [lowerCity, ...prevList];
+              } else if (index > 0) {
+                const updated = [...prevList];
+                const [item] = updated.splice(index, 1);
+                updated.unshift(item);
+                return updated;
+              }
+              return prevList;
+            });
           }
-        },[city])
-        if(!singleCityError && !cityList.includes(city.toLowerCase())){
-            setCityList(prev => [city, ...prev]);
-            console.log('singleCityError2: ',singleCityError)
-          
-        }
+        }, [city, singleCityError, singleCityLoading]);
+        // ✅ Reset error when city changes
+          useEffect(() => {
+            setSingleCityError(null);
+          }, [city]);
+                  
         console.log(cityList)
-        const {
-          data,
-          error,
-          loading,
-          setError,
-        } = useFetchAPI(cityList);
+        useEffect(()=>{
+          FetchData(cityList)
+        },[cityList])
+       
         console.log(data)
 
         return (

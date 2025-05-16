@@ -35,33 +35,27 @@ function useFetchAPIForFixedCity(city){
    return{data,error,loading,setError}
 }
 //fetch multiple location
-function useFetchAPI(cityList){
+function useFetchAPI(){
   
   const [data,setData]=useState({});
   const [error,setError]=useState(false);
   const [loading,setLoading]=useState(true);
-  useEffect(()=>{
-    setLoading(true);
-    if (!cityList || cityList.length === 0) return;
-    setError(false);
-    fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timelinemulti?key=8X75BGGT4LLBSPXFWXFRKL4KJ&locations=${encodeURIComponent(cityList.join('|'))}&unitGroup=us&contentType=json`)
-    .then(response=>{
-      if(!response.ok) throw new Error('No data')
-      else{
-        return response.json();
-      }
-    })
-    .then(data=>{
-      setData(data)
-    })
-    .catch(error=>{
-      setError(true)
-    })
-    .finally(()=>{
-      setLoading(false)
-    })
-  },[cityList])
-  
-  return {data,error,loading,setError};
+  const FetchData=async (cityList)=>{
+   if(cityList.length===0 || !cityList) return;
+   setLoading(true);
+   setError(false);
+   try{
+    const response=await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timelinemulti?key=8X75BGGT4LLBSPXFWXFRKL4KJ&locations=${encodeURIComponent(cityList.join('|'))}&unitGroup=us&contentType=json`)
+    if(!response.ok) throw new Error;
+    const result=await response.json()
+    setData(result)
+   } catch(err){
+    setError(true)
+   }
+   finally{
+    setLoading(false)
+   }
+  }
+  return {FetchData,data,error,loading,setError};
 }
 export {useFetchAPI,useFetchAPIForFixedCity}
