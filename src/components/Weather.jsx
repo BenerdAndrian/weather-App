@@ -39,7 +39,7 @@ export default function WeatherSection(){
     {showError && <ErrorPage handleStatus={changeErrorStatus}/>}
     {/* if it still fetching the data,we show the LoadingPage component */}
     {singleCityLoading && <LoadingPage/>}
-    <div className="md:grid md:grid-cols-[1.5fr_1fr] md:grid-rows-[40px_1fr_1fr_1fr] bg-black gap-4 px-5">
+    <div className="md:grid md:grid-cols-[1.5fr_1fr] md:grid-rows-[40px_1fr_1fr_1fr] pb-[4rem] md:pb-0 bg-black gap-4 px-5">
     <div className="md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-5">
     <InputSection/>
     <div className="md:ml-[3rem]">
@@ -84,7 +84,7 @@ function TodayForecastSection({targetHours=[],data}){
   // render jsx
   return(
   <>
-  <div className="bg-[rgb(30,40,55)] rounded-2xl pt-3 mt-3 px-3">
+  <div className="bg-[rgb(30,40,55)] rounded-2xl pt-3 mt-3 px-3 pb-5">
   <h2 className="text-[lightgray] font-bold ml-[2rem] text-[0.7rem]">TODAY'S FORECAST</h2>
   <ul className="grid grid-cols-3 md:grid-cols-[repeat(auto-fit,minmax(0,1fr))] p-2">
     {hours.map((hour)=>(

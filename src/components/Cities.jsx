@@ -24,7 +24,7 @@ import { useState,useEffect } from "react";
         {showError && <ErrorPage handleStatus={changeErrorStatus}/>}
         {singleCityLoading && <LoadingPage/>}
         {(singleCityData && data) && 
-          <div className="md:grid md:grid-cols-[1.5fr_1fr] md:grid-rows-[40px_1fr_1fr_1fr] bg-black px-5">
+          <div className="md:grid pb-[3rem] md:pb-0 md:grid-cols-[1.5fr_1fr] md:grid-rows-[40px_1fr_1fr_1fr] bg-black px-5">
           <div className="md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-2">
           <InputSection/>
           </div>
