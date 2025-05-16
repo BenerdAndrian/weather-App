@@ -9,7 +9,7 @@ import { DataContext } from "./DataContext";
 //key2: R9Y3JEJJBA9SFRHKD32F92GMQ
 
 function useFetchAPIForFixedCity(city){
-   const [data,setData]=useState();
+   const [data,setData]=useState(null);
    const [error,setError]=useState(false);
    const [loading,setLoading]=useState(true);
    useEffect(()=>{
