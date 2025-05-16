@@ -1,9 +1,10 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DataContext } from "./DataContext";
 import { CityCard } from "./CityCard";
 function SearchedCities(){
-    const {data,error,loading,setCityList,cityList}=useContext(DataContext);
-    console.log(data)
+    const {localData,setCityList,cityList}=useContext(DataContext);
+    //take data from locastorage
+    console.log('local: ',localData)
     const currentTime=(epochTime)=>{
      const date=new Date(epochTime*1000);
      const localTime=date.toLocaleDateString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
@@ -17,14 +18,14 @@ function SearchedCities(){
     }
     return(
         <>
-         <ul className="flex flex-col scroll-auto">
+         <ul className="flex flex-col overflow-scroll md:h-[calc(31rem+8px)]">
         
-         {data.locations && data.locations.map((location,index)=>(
+         {localData.locations && localData.locations.map((location,index)=>(
            <li>
            <CityCard deleteCity={()=>deleteCity(index)} icon={location.days[0].icon} address={location.address} currTime={currentTime(location.days[0].datetimeEpoch)} temp={location.days[0].temp}/>
            </li> 
          ))}
-         {!data.locations && <li> <CityCard icon={data.days[0].icon} address={data.address} currTime={currentTime(data.days[0].datetimeEpoch)} temp={data.days[0].temp}/> </li>}
+         {!localData.locations && <li> <CityCard icon={localData.days[0].icon} address={localData.address} currTime={currentTime(localData.days[0].datetimeEpoch)} temp={localData.days[0].temp}/> </li>}
          </ul>
         
         </>

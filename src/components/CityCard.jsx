@@ -4,6 +4,10 @@ import locationArrow from '../assets/img/locationArrow.svg'
 import closeIcon from '../assets/img/closeIconn.svg'
 function CityCard({icon,address,currTime,temp,deleteCity}){
     const [isHover,setIsHover]=useState(false)
+    const search=(address)=>{
+    const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(address)}`;
+    window.open(searchUrl,'_blank')
+    }
     return(
         <div className="flex gap-3 group">
         {/* Primary Element */}
@@ -13,7 +17,7 @@ function CityCard({icon,address,currTime,temp,deleteCity}){
             <p className="flex flex-col gap-3">
               <span className="font-bold text-white text-[1.2rem] flex items-center">
                 <span>{address.toUpperCase()}</span>
-                <img className="w-4 h-4 ml-5" src={locationArrow} alt="arrow icon" />
+                <img onClick={()=>search(address)} className="w-4 h-4 ml-5 hover:w-6 hover:h-6 cursor-pointer" src={locationArrow} alt="arrow icon" />
               </span>
               <span className="text-gray-400 text-[0.7rem] font-bold">{currTime}</span>
             </p>

@@ -4,6 +4,7 @@ export const DataContext=createContext(null);
  export const DataProvider = ({ children }) => {
         const [city, setCity] = useState('hanoi');
         const [cityList, setCityList] = useState(['hanoi']);
+        const [localData,setLocalData]=useState();
         const {
           FetchData,
           data,
@@ -20,7 +21,10 @@ export const DataContext=createContext(null);
         // Reset error right after new city is set
         console.log('singleCityError1: ',singleCityError)
         const [cityValidated, setCityValidated] = useState(false);
-
+        useEffect(()=>{
+          localStorage.setItem('cities',JSON.stringify(data))
+          setLocalData(JSON.parse(localStorage.getItem('cities')))
+        },[data])
         // Step 1: Đợi fetch xong và quyết định hợp lệ
         useEffect(() => {
           if(city) setCityValidated(true)
@@ -74,7 +78,7 @@ export const DataContext=createContext(null);
               singleCityLoading,
               setError,
               setSingleCityError,
-              setCityList,
+              setCityList,localData,
             }}
           >
             {children}

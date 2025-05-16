@@ -19,7 +19,7 @@ import pressure from '../assets/img/pressure.svg'
 // Weather section component which serve as parent component for the main Weather UI page
 export default function WeatherSection(){
  const [showError,setShowError]=useState(false)
- const {data,error,loading,singleCityData,singleCityError,singleCityLoading,setError,setSingleCityError}=useContext(DataContext)
+ const {localData,data,error,loading,singleCityData,singleCityError,singleCityLoading,setError,setSingleCityError}=useContext(DataContext)
  // prepare the array of target hours for the TodayForecast component to render dynamically
  const targetHours = ['06', '09', '12', '15', '18', '21'];
  console.log(data)
@@ -43,7 +43,7 @@ export default function WeatherSection(){
     <div className="md:col-start-1 md:col-end-2 md:row-start-1 md:row-end-5">
     <InputSection/>
     <div className="md:ml-[3rem]">
-    <TodayTempMain data={singleCityData}/>
+    <TodayTempMain data={localData}/>
     </div>
    
     <TodayForecastSection data={singleCityData} targetHours={targetHours}/>
@@ -64,12 +64,12 @@ function TodayTempMain({data}){
     <div className="grid grid-cols-2 bg-black">
         <div className="grid grid-rows-2">
           <div>
-          <p className="font-bold text-white text-[1.5rem]">{data.address}</p>
-          <p className="text-gray-400">Chance Of Rain: {data.currentConditions.precipprob}%</p>
+          <p className="font-bold text-white text-[1.5rem]">{data?.address || data?.locations?.[0].address}</p>
+          <p className="text-gray-400">Chance Of Rain: {data?.currentConditions?.precipprob || data?.days?.[0].precipprob || data?.locations?.[0].days?.[0].precipprob}%</p>
           </div>
-          <p className="font-bold text-white text-[1.6rem] mt-5">{data.currentConditions.temp}°</p>
+          <p className="font-bold text-white text-[1.6rem] mt-5">{data?.currentConditions?.temp|| data?.days?.[0].temp || data?.locations?.[0].days?.[0].precipprob}°</p>
         </div>
-        <img className="w-25 h-25 md:w-30 md:h-30 ml-[2rem] md:ml-[4rem]" src={`../../public/${data.currentConditions.icon}.png`}alt="Weather icon" />
+        <img className="w-25 h-25 md:w-30 md:h-30 ml-[2rem] md:ml-[4rem]" src={`../../public/${data?.currentConditions?.icon || data?.days?.[0].icon || data?.locations?.[0].days?.[0].icon}.png`}alt="Weather icon" />
     </div>
    )
 }

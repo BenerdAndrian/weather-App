@@ -8,7 +8,7 @@ import { ErrorPage } from "./ErrorPage";
 import { LoadingPage } from "./LoadingPage";
 import { useState,useEffect } from "react";
  export default function CitiesPage(){
-    const {singleCityData,singleCityError,singleCityLoading,setSingleCityError,data}=useContext(DataContext)
+    const {localData,singleCityData,singleCityError,singleCityLoading,setSingleCityError,data}=useContext(DataContext)
     const [showError,setShowError]=useState(false);
     const changeErrorStatus=()=>{
         setShowError(false)
@@ -32,7 +32,7 @@ import { useState,useEffect } from "react";
           <SearchedCities/>
           </div>
           <div className="md:col-start-2 md:col-end-3 md:row-start-2 row-end-5 md:ml-[2rem]">
-           <TodayTempMain data={singleCityData}/>
+           <TodayTempMain data={localData}/>
            <div className="mb-4">
            <TodayForecastSection targetHours={['06','09','12']} data={singleCityData}/>
            <div className="mt-3">
