@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { DataContext } from "./DataContext";
 import { CityCard } from "./CityCard";
-function SearchedCities(mode){
+function SearchedCities({mode}){
     const {localData,setCityList,cityList}=useContext(DataContext);
     //take data from locastorage
     console.log('local: ',localData)

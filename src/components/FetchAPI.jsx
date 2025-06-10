@@ -15,7 +15,7 @@ function useFetchAPIForFixedCity(city){
    useEffect(()=>{
    setLoading(true);
    setError(false);
-   fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=us&key=8X75BGGT4LLBSPXFWXFRKL4KJ&contentType=json`)
+   fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=us&key=R9Y3JEJJBA9SFRHKD32F92GMQ&contentType=json`)
    .then(response=>{
     if(!response.ok){
       throw new Error('server error');
@@ -45,7 +45,7 @@ function useFetchAPI(){
    setLoading(true);
    setError(false);
    try{
-    const response=await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timelinemulti?key=8X75BGGT4LLBSPXFWXFRKL4KJ&locations=${encodeURIComponent(cityList.join('|'))}&unitGroup=us&contentType=json`)
+    const response=await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timelinemulti?key=R9Y3JEJJBA9SFRHKD32F92GMQ&locations=${encodeURIComponent(cityList.join('|'))}&unitGroup=us&contentType=json`)
     if(!response.ok) throw new Error;
     const result=await response.json()
     setData(result)

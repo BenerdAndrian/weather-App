@@ -1,17 +1,32 @@
-import { MapContainer,Marker,Popup,TileLayer } from "react-leaflet";
+import { MapContainer,Marker,Popup,TileLayer, useMap } from "react-leaflet";
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import placeholder from '../assets/img/placeholder.png'
-import { useContext, useEffect } from "react";
 import { DataContext } from "./DataContext";
+import { useContext,useEffect,useState } from "react";
 // map component to show map based on the longtitude and latitude
+function ChangeMapView({lat,long}){
+  const map = useMap();
+  map.setView([lat, long], map.getZoom());
+  return null;
+}
 export default function MapComponent(){
  const {localData}=useContext(DataContext)
- let latitude,longtitude;
+ console.log('day laf data cua map: ',localData)
+ const [lat,setLat]=useState(100);
+ const [long,setLong]=useState(100);
  useEffect(()=>{
-  latitude=localData.locations?localData.locations[0].latitude:localData.latitude;
-  longtitude=localData.locations?localData.locations[0].longtitude:localData.longtitude;
+  console.log("co chay code nay ko?")
+ let latitude=localData.latitude||localData.locations[0].latitude;
+ let longitude=localData.longitude||localData.locations[0].longitude;
+ console.log(`latitude:${latitude}`)
+ console.log(`longitude:${longitude}`)
+ setLat(latitude);
+ setLong(longitude);
  },[localData])
+ 
+ console.log('lat outside: ',lat)
+ console.log('long outside: ',long)
  let defaultIcon=L.icon({
  iconUrl:placeholder,
  iconSize:[38,38]
@@ -19,12 +34,13 @@ export default function MapComponent(){
  L.Marker.prototype.options.icon=defaultIcon;
  return(
     <>
-    <MapContainer center={[latitude,longtitude]} zoom={13} style={{height:'84.5vh',borderRadius:'1rem'}}>
+    <MapContainer center={[lat,long]} zoom={13} style={{height:'84.5vh',borderRadius:'1rem'}}>
+    <ChangeMapView lat={lat} long={long}/>
     <TileLayer
     attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
-     <Marker position={[21.0289, 105.855]}>
+     <Marker position={[lat,long]}>
         <Popup>
           A simple popup <br /> Easy peasy!
         </Popup>
