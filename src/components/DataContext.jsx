@@ -5,6 +5,17 @@ export const DataContext=createContext(null);
         const [city, setCity] = useState('hanoi');
         const [cityList, setCityList] = useState(['hanoi']);
         const [localData,setLocalData]=useState();
+        const [cityValidated, setCityValidated] = useState(false);
+        const [settings,createSettings]=useState({
+          temp:'Fahrenheit',
+          wind:'mph',
+          pressure:'hPa',
+          distance:'km',
+          '12FormatTimer': false,
+          getByGPS:false,
+          notification:false
+        })
+
         const {
           FetchData,
           data,
@@ -20,7 +31,12 @@ export const DataContext=createContext(null);
         } = useFetchAPIForFixedCity(city);
         // Reset error right after new city is set
         console.log('singleCityError1: ',singleCityError)
-        const [cityValidated, setCityValidated] = useState(false);
+        
+        useEffect(()=>{
+         
+        },[settings])
+
+
         useEffect(()=>{
           localStorage.setItem('cities',JSON.stringify(data))
           setLocalData(JSON.parse(localStorage.getItem('cities')))

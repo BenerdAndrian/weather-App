@@ -10,15 +10,11 @@ export default function SettingPage(){
         },
         {
             name:'Wind',
-            units:['km/h','m/s','knots']
+            units:['km/h','m/s','mph']
         },
         {
             name:'Pressure',
             units:['Hpa','Inches','Kpa','Mm']
-        },
-        {
-            name:'Precipitation',
-            units:['Milimeters','Inches']
         },
         {
             name:'Distance',
