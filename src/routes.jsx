@@ -4,6 +4,7 @@ import WeatherSection from "./components/Weather";
 import AirConditionDetailPage from "./components/AirConditionDetail";
 import CitiesPage from "./components/Cities";
 import MapPage from "./components/MapPage";
+import SettingPage from "./components/settings";
 const routes=[
     {
         path:"/",
@@ -13,7 +14,8 @@ const routes=[
             {path:"/Weather",element:<WeatherSection/>},
             {path:"/Weather/air-conditions",element:<AirConditionDetailPage/>},
             {path:"/cities",element:<CitiesPage/>},
-            {path:"/map",element:<MapPage/>}
+            {path:"/map",element:<MapPage/>},
+            {path:"/settings",element:<SettingPage/>}
         ]
     }
 ]
