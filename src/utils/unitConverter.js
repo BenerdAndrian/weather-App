@@ -35,7 +35,7 @@ function pressureConverter(value,unit){
     switch(unit){
         case 'hpa':
             return value;
-        case 'Mmhg':
+        case 'mmhg':
             return hpaToMmhg(value);
         case 'kpa':
             return hpaToKpa(value);

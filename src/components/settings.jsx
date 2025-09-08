@@ -2,15 +2,26 @@ import UnitSettingBoard from "./unitSetting";
 import settingIcon from '../assets/img/settings.svg'
 import { NotificationBoard,GeneralSettingBoard } from "./generalSetting";
 import { SignUp,PremiumBoard } from "./premiumBoard";
+import { useContext } from "react";
+import { DataContext } from "./DataContext";
 export default function SettingPage(){
+    const {createSettings,settings}=useContext(DataContext);
+        console.log('settingdd: ',settings)
+        const modifySettings=(category,unitName)=>{
+            if(unitName === settings[category]) return;
+            createSettings({
+                ...settings,
+                [category]: unitName,
+            })
+        }
     const unitArr=[
         {
             name: 'Temperature',
-            units:['Celcius','Farenheit']
+            units:['Celcius','Fahrenheit']
         },
         {
             name:'Wind',
-            units:['km/h','m/s','mph']
+            units:['Kmh','Ms','Mph']
         },
         {
             name:'Pressure',
@@ -21,6 +32,7 @@ export default function SettingPage(){
             units:['Kilometers','Meters']
         }
     ]
+
     return (
         <>
         <div className="md:grid md:grid-cols-[2fr_1fr] md:grid-rows-[40px_1fr_1fr] gap-3 pr-3">
@@ -32,15 +44,15 @@ export default function SettingPage(){
            <div className="md:row-start-2 md:row-end-3 ml-[1.2rem] mt-[1rem] px-3 pr-4 overflow-scroll md:h-[calc(31rem+8px)]">
            <p className="bold text-white font-bold text-[1.2rem] ml-3 mb-2">Units</p>
            <div className=" p-5 bg-[rgb(30,40,55)] rounded-3xl mb-[1.88rem]">
-             <UnitSettingBoard unitArr={unitArr}/>
+             <UnitSettingBoard modifySettings={modifySettings} settings={settings} unitArr={unitArr}/>
            </div>
            <p className="bold text-white font-bold text-[1.2rem] ml-3 mb-2">Notifications</p>
            <div className="p-5 bg-[rgb(30,40,55)] rounded-3xl mb-[1.88rem]">
-           <NotificationBoard/>
+           <NotificationBoard modifySettings={modifySettings} settings={settings}/>
            </div>
            <p className="bold text-white font-bold text-[1.2rem] ml-3 mb-2">Generals</p>
            <div className="p-5 bg-[rgb(30,40,55)] rounded-3xl mb-[1.88rem]">
-           <GeneralSettingBoard/>
+           <GeneralSettingBoard modifySettings={modifySettings} settings={settings}/>
            </div>
            </div>
         </div>

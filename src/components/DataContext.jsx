@@ -7,15 +7,15 @@ export const DataContext=createContext(null);
         const [localData,setLocalData]=useState();
         const [cityValidated, setCityValidated] = useState(false);
         const [settings,createSettings]=useState({
-          temp:'Fahrenheit',
-          wind:'mph',
-          pressure:'hPa',
-          distance:'km',
+          Temperature:'Fahrenheit',
+          Wind:'Mph',
+          Pressure:'Hpa',
+          Distance:'Kilometers',
           '12FormatTimer': false,
           getByGPS:false,
           notification:false
         })
-
+        
         const {
           FetchData,
           data,
@@ -33,7 +33,7 @@ export const DataContext=createContext(null);
         console.log('singleCityError1: ',singleCityError)
         
         useEffect(()=>{
-         
+         localStorage.setItem('userSettings',JSON.stringify(settings))
         },[settings])
 
 
@@ -94,7 +94,7 @@ export const DataContext=createContext(null);
               singleCityLoading,
               setError,
               setSingleCityError,
-              setCityList,localData,
+              setCityList,localData,createSettings,settings
             }}
           >
             {children}
