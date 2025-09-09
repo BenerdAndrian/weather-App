@@ -1,6 +1,9 @@
 function fahrenheitToCelcius(degree){
     return (((degree-32))*5/9).toFixed(1)
 }
+function celciusToFahrenheit(degree){
+    return ((degree*9/5)+32).toFixed(1)
+}
 function mphToMs(mph){
    return (mph*0.44704).toFixed(1);
 }
@@ -18,6 +21,9 @@ function hpaToMmhg(hpa){
 }
 function kmToMs(km){
     return (km*1000).toFixed(1);
+}
+function msToKm(ms){
+    return (ms/1000).toFixed(1);
 }
 function windConverter(value, unit) {
     switch (unit) {
@@ -46,7 +52,7 @@ function pressureConverter(value,unit){
 function tempConverter(value,unit){
     switch(unit){
         case 'Fahrenheit':
-            return value;
+            return celciusToFahrenheit(value);
         case 'Celcius':
             return fahrenheitToCelcius(value)
     }
@@ -54,7 +60,7 @@ function tempConverter(value,unit){
 function distanceConverter(value,unit){
     switch(unit){
         case 'Kilometers':
-            return value;
+            return msToKm(value);
         case 'Meters':
             return kmToMs(value)
     }
@@ -62,9 +68,9 @@ function distanceConverter(value,unit){
 function converter(userSettings,data){
     console.log('nai: ',data.currentConditions)
    if(data.locations) return;
-   const windData= windConverter(data.currentConditions.windspeed,userSettings.Wind);
-   const tempData= tempConverter(data.currentConditions.temp,userSettings.Temperature);
-   const pressureData=pressureConverter(data.currentConditions.pressure,userSettings.Pressure);
-   return {windData,tempData,pressureData}
+   const windspeed= windConverter(data.currentConditions.windspeed,userSettings.Wind);
+   const temp= tempConverter(data.currentConditions.temp,userSettings.Temperature);
+   const pressure=pressureConverter(data.currentConditions.pressure,userSettings.Pressure);
+   return {windspeed,temp,pressure}
 }
 export {fahrenheitToCelcius,mphToMs,mphToKmh,hpaToInches,hpaToKpa,hpaToMmhg,kmToMs,tempConverter,distanceConverter,pressureConverter,windConverter,converter}

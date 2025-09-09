@@ -58,6 +58,7 @@ export default function WeatherSection(){
 }
 // component to render city name and temperature,icon
 function TodayTempMain({data}){
+  console.log('kuman: ',data)
   //if there is no data, return null
   if(!data) return null;
    return(

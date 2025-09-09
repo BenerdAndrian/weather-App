@@ -35,9 +35,12 @@ export const DataProvider = ({ children }) => {
     if(singleCityData){
         const specs = converter(settings, singleCityData);
         console.log("lak: ",specs);
+        let cityData = {...singleCityData.currentConditions,...specs}
+        singleCityData.currentConditions = cityData
+        console.log('proc: ',singleCityData)
     }
-  }, [settings]);
-
+  }, [settings,singleCityData]);
+ 
   useEffect(() => {
     localStorage.setItem("cities", JSON.stringify(data));
     setLocalData(JSON.parse(localStorage.getItem("cities")));
