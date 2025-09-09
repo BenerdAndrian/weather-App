@@ -1,31 +1,31 @@
 function fahrenheitToCelcius(degree){
-    return ((degree-32))*5/9
+    return (((degree-32))*5/9).toFixed(1)
 }
 function mphToMs(mph){
-   return mph*0.44704;
+   return (mph*0.44704).toFixed(1);
 }
 function mphToKmh(mph){
-    return mph*1.60934;
+    return (mph*1.60934).toFixed(1);
 }
 function hpaToInches(hpa){
-    return hpa*0.02953;
+    return (hpa*0.02953).toFixed(1);
 }
 function hpaToKpa(hpa){
-    return hpa/10;
+    return (hpa/10).toFixed(1);
 }
 function hpaToMmhg(hpa){
-    return hpa*0.75006;
+    return (hpa*0.75006).toFixed(1);
 }
 function kmToMs(km){
-    return km*1000
+    return (km*1000).toFixed(1);
 }
 function windConverter(value, unit) {
     switch (unit) {
-        case 'mph':
+        case 'Mph':
             return value;
-        case 'kmh':
+        case 'Kmh':
             return mphToKmh(value);
-        case 'ms':
+        case 'Ms':
             return mphToMs(value);
         default:
             return 0;
@@ -33,30 +33,38 @@ function windConverter(value, unit) {
 }
 function pressureConverter(value,unit){
     switch(unit){
-        case 'hpa':
+        case 'Hpa':
             return value;
-        case 'mmhg':
+        case 'Mmhg':
             return hpaToMmhg(value);
-        case 'kpa':
+        case 'Kpa':
             return hpaToKpa(value);
-        case 'inches':
+        case 'Inches':
             return hpaToInches(value)
     }
 }
 function tempConverter(value,unit){
     switch(unit){
-        case 'fahrenheit':
+        case 'Fahrenheit':
             return value;
-        case 'celcius':
+        case 'Celcius':
             return fahrenheitToCelcius(value)
     }
 }
 function distanceConverter(value,unit){
     switch(unit){
-        case 'km':
+        case 'Kilometers':
             return value;
-        case 'm':
+        case 'Meters':
             return kmToMs(value)
     }
 }
-export {fahrenheitToCelcius,mphToMs,mphToKmh,hpaToInches,hpaToKpa,hpaToMmhg,kmToMs,tempConverter,distanceConverter,pressureConverter,windConverter}
+function converter(userSettings,data){
+    console.log('nai: ',data.currentConditions)
+   if(data.locations) return;
+   const windData= windConverter(data.currentConditions.windspeed,userSettings.Wind);
+   const tempData= tempConverter(data.currentConditions.temp,userSettings.Temperature);
+   const pressureData=pressureConverter(data.currentConditions.pressure,userSettings.Pressure);
+   return {windData,tempData,pressureData}
+}
+export {fahrenheitToCelcius,mphToMs,mphToKmh,hpaToInches,hpaToKpa,hpaToMmhg,kmToMs,tempConverter,distanceConverter,pressureConverter,windConverter,converter}
