@@ -34,7 +34,7 @@ export default function MapComponent(){
  L.Marker.prototype.options.icon=defaultIcon;
  return(
     <>
-    <MapContainer center={[lat,long]} zoom={13} style={{height:'84.5vh',borderRadius:'1rem'}}>
+    <MapContainer center={[lat,long]} zoom={13} style={{height:'77vh',borderRadius:'1rem'}}>
     <ChangeMapView lat={lat} long={long}/>
     <TileLayer
     attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
