@@ -13,7 +13,7 @@ function CityCard({icon,address,currTime,temp,deleteCity,mode}){
         {/* Primary Element */}
         <div className={`flex justify-between bg-[rgb(30,40,55)] p-5 px-8 rounded-3xl mb-5 border${mode==='trans' && 'hover:border-blue-500 transition-[width] duration-700 ease-in-out'}  w-full`}>
           <div className="flex items-center">
-            <img className="hidden md:block md:w-20 md:h-20 mr-8" src={`.../../public/${icon}.png`} alt="icon" />
+            <img className="hidden md:block md:w-20 md:h-20 mr-8" src={`/${icon}.png`} alt="icon" />
             <p className="flex flex-col gap-3">
               <span className="font-bold text-white text-[1.2rem] flex items-center">
                 <span>{address.toUpperCase()}</span>

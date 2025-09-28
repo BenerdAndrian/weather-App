@@ -70,7 +70,7 @@ function TodayTempMain({data}){
           </div>
           <p className="font-bold text-white text-[1.6rem] mt-5">{data?.currentConditions?.temp|| data?.days?.[0].temp || data?.locations?.[0].days?.[0].precipprob}°</p>
         </div>
-        <img className="w-25 h-25 md:w-30 md:h-30 ml-[2rem] md:ml-[4rem]" src={`../../public/${data?.currentConditions?.icon || data?.days?.[0].icon || data?.locations?.[0].days?.[0].icon}.png`}alt="Weather icon" />
+        <img className="w-25 h-25 md:w-30 md:h-30 ml-[2rem] md:ml-[4rem]" src={`/${data?.currentConditions?.icon || data?.days?.[0].icon || data?.locations?.[0].days?.[0].icon}.png`}alt="Weather icon" />
     </div>
    )
 }
@@ -91,7 +91,7 @@ function TodayForecastSection({targetHours=[],data}){
     {hours.map((hour)=>(
        <li className="flex flex-col items-center justify-center border-r-1 border-r-gray-300 last:border-r-0 text-[0.6rem]">
        <p className="text-[lightgray] mb-2 text-[0.8rem]">{hour.datetime.split(':')[0]}:00</p>
-       <img className="w-8 h-8" src={`../../public/${hour.icon}.png`} alt="Weather icon" />
+       <img className="w-8 h-8" src={`/${hour.icon}.png`} alt="Weather icon" />
        <p className="font-bold text-white mt-2 pb-2 text-[0.95rem]">{hour.temp}°</p>
        </li>
     ))}
@@ -181,7 +181,7 @@ return(
         <li className="flex py-3 justify-between items-center border-b-1 border-b-[rgb(60,60,80)] last:border-b-0 last:pb-8 -mt-[1rem] h-full">
          <p className="text-[lightgray] text-[0.7rem] font-bold">{extractWeekDay(day.datetime)}</p>
          <div className="flex items-center h-[2.5rem]">
-          <img className="w-8 h-8 mr-2" src={`../../public/${day.icon}.png`} alt="img" />
+          <img className="w-8 h-8 mr-2" src={`/${day.icon}.png`} alt="img" />
           <p className="text-white font-bold text-[0.8rem] w-10">{discardHyphen(day.icon)}</p>
          </div>
          <p className="text-white text-[0.7rem] font-bold">{day.datetime}</p>
