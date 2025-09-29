@@ -18,7 +18,7 @@ function SearchedCities({mode}){
     }
     return(
         <>
-         <ul className="flex flex-col overflow-scroll md:h-[calc(31rem+8px)]">
+         <ul className="flex flex-col md:h-[calc(31rem+8px)]">
         
          {localData.locations && localData.locations.map((location,index)=>(
            <li>

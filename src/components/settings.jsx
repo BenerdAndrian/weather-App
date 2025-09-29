@@ -41,7 +41,7 @@ export default function SettingPage(){
                <img className="w-6 h-6" src={settingIcon} alt="setting icon" />
                <h1 className="font-bold text-[1.2rem]">Settings</h1>
            </div>
-           <div className="md:row-start-2 md:row-end-3 ml-[1.2rem] mt-[1rem] px-3 pr-4 overflow-scroll md:h-[calc(31rem+8px)]">
+           <div className="md:row-start-2 md:row-end-3 ml-[1.2rem] mt-[1rem] px-3 pr-4 md:h-[calc(31rem+8px)]">
            <p className="bold text-white font-bold text-[1.2rem] ml-3 mb-2">Units</p>
            <div className=" p-5 bg-[rgb(30,40,55)] rounded-3xl mb-[1.88rem]">
              <UnitSettingBoard modifySettings={modifySettings} settings={settings} unitArr={unitArr}/>
